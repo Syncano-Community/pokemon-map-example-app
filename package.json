@@ -1,0 +1,42 @@
+{
+  "name": "Pokemon_Map_Syncano",
+  "version": "1.0.0",
+  "description": "Pokemon Map based on Syncano.",
+  "scripts": {
+    "start": "node server.js",
+    "lint": "eslint src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mobxjs/mobx-react-boilerplate.git"
+  },
+  "devDependencies": {
+    "babel-core": "6.11.4",
+    "babel-eslint": "6.1.2",
+    "babel-loader": "6.2.4",
+    "babel-plugin-transform-decorators-legacy": "1.3.4",
+    "babel-preset-es2015": "6.9.0",
+    "babel-preset-react": "6.11.1",
+    "babel-preset-stage-1": "6.5.0",
+    "eslint": "3.1.1",
+    "eslint-plugin-react": "5.2.2",
+    "mobx-react-devtools": "4.2.3",
+    "react-hot-loader": "3.0.0-beta.2",
+    "webpack": "1.13.1",
+    "webpack-dev-server": "1.14.1"
+  },
+  "dependencies": {
+    "lodash": "4.13.1",
+    "material-ui": "0.15.2",
+    "mobx": "2.4.0",
+    "mobx-react": "3.5.1",
+    "mobx-react-devtools": "4.2.0",
+    "pokeapi": "0.0.1",
+    "react": "15.1.0",
+    "react-addons-update": "15.2.1",
+    "react-dom": "15.2.1",
+    "react-google-maps": "4.11.0",
+    "react-tap-event-plugin": "1.0.0",
+    "syncano": "1.0.23"
+  }
+}
