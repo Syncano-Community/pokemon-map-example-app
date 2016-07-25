@@ -1,6 +1,5 @@
-import { observable, computed, transaction, action } from 'mobx'
+import { observable } from 'mobx'
 import Syncano from 'syncano';
-import PokeApi from 'pokeapi';
 
 import _ from 'lodash';
 
@@ -16,13 +15,15 @@ class AppStore {
   @observable markers = [];
   @observable pokemons = [];
   @observable term = '';
-  @observable hasInitialDataLoaded = false;
+  @observable centerMap = { lat: 0, lng: 0 };
+  @observable zoomMap = 3;
 
-  constructor(makers){
+  constructor(){
     this.markers = [];
   }
 
   fetchMarkers = () => {
+    console.info('::fetchMarkers');
     const { DataObject } = connection;
     let objects = [];
 
@@ -47,11 +48,11 @@ class AppStore {
         }
       });
       this.markers = markers;
-      this.hasInitialDataLoaded = true;
     });
   }
 
   fetchPokemons = () => {
+    console.info('::fetchPokemons');
     const { DataObject } = connection;
     let objects = [];
 
@@ -67,8 +68,9 @@ class AppStore {
     });
   }
 
-  getPokemonInfo = (marker_id = 1) => {
-    return _.find(this.pokemons, { pokemon_id: marker_id });
+  getPokemonInfo = (marker_pokemon_id = 1) => {
+    console.info('::getPokemonInfo');
+    return _.find(this.pokemons, { pokemon_id: marker_pokemon_id });
   }
 
   handleSearchTerm = (marker) => {
@@ -77,6 +79,11 @@ class AppStore {
 
   setSearchTerm = (term) => {
     this.term = term;
+  }
+
+  setCenterMap = (position) => {
+    this.centerMap = position;
+    this.zoomMap = 6;
   }
 
   // addTodo(text) {

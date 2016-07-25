@@ -15,11 +15,6 @@ class SearchBar extends Component {
     super(props, context);
   }
 
-  componentDidMount() {
-    this.props.appState.fetchMarkers();
-    window.addEventListener('resize', this.handleWindowResize);
-  }
-
   renderMenuItems() {
     const { appState } = this.props;
 
@@ -31,6 +26,7 @@ class SearchBar extends Component {
           primaryText={marker.pokemon.name}
           secondaryText={_.map(marker.pokemon.type, (type) => `${type} `)}
           style={{ lineHeight: '75px' }}
+          onTouchTap={() => appState.setCenterMap(marker.position)}
           leftIcon={
             <Avatar 
               style={{ 
@@ -43,11 +39,10 @@ class SearchBar extends Component {
               }}/>}
             />
     }));
-  };
+  }
 
   render() {
     const { appState } = this.props;
-    const data =  _.map(appState.markers, (marker) => { return marker.pokemon.name });
 
     const styles = {
       paper: {
@@ -65,7 +60,7 @@ class SearchBar extends Component {
           maxSearchResults={10}
           style={{margin: '0 15'}}
           onNewRequest={(value) => appState.setSearchTerm(value.text)}
-          onUpdateInput={(value) => appState.setSearchTerm(value)}
+          // onUpdateInput={(value) => appState.setSearchTerm(value)}
           dataSource={this.renderMenuItems()}
         />
       </Paper>

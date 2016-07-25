@@ -18,11 +18,23 @@ class Map extends Component {
 
   componentDidMount() {
     this.props.appState.fetchPokemons();
+    this.getPosition();
     window.addEventListener('resize', this.handleWindowResize);
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleWindowResize);
+  }
+
+  getPosition() {
+    const { appState } = this.props;
+
+    navigator.geolocation.getCurrentPosition((position) => {
+      const lat  = position.coords.latitude;
+      const lng = position.coords.longitude;
+
+      appState.setCenterMap({lat, lng});
+    });
   }
 
   handleWindowResize() {
@@ -42,6 +54,7 @@ class Map extends Component {
 
   handleMarkerClick(marker) {
     marker.showInfo = !marker.showInfo;
+    this.props.appState.setCenterMap(marker);
   }
 
   render() {
@@ -53,33 +66,33 @@ class Map extends Component {
           <div
             {...this.props}
             style={{
-              height: '100%',
+              height: '90%',
             }}
           />
         }
         googleMapElement={
           <GoogleMap
-            ref={(map) => (this._googleMapComponent = map) && console.log(map.getZoom())}
             defaultZoom={3}
-            defaultCenter={{ lat: -25.363882, lng: 131.044922 }}
+            zoom={appState.zoomMap}
+            defaultCenter={{ lat: 25.363882, lng: 135.044922 }}
+            center={ appState.centerMap }
             // onClick={this.handleMapClick}
           >
             <MarkerClusterer
               averageCenter
-              enableRetinaIcons
+              minimumClusterSize={4}
               gridSize={ 60 }
             >
-              {_.map(appState.markers, (marker, index) => {
+              {appState.markers && _.map(appState.markers, (marker, index) => {
                 return (
                   <Marker
                     {...marker}
                     onClick={this.handleMarkerClick.bind(this, marker)}
-                    visible={this.props.appState.handleSearchTerm(marker)}
-                    icon={marker.pokemon.image_url || null}
+                    visible={appState.handleSearchTerm(marker)}
+                    icon={marker.pokemon.image_url}
                   >
-                    {marker.showInfo && this.props.appState.handleSearchTerm(marker) && <InfoWindow 
-                      onClick={this.handleClick}
-                    >
+                    {marker.showInfo && appState.handleSearchTerm(marker) && 
+                    <InfoWindow>
                       {marker.pokemon ? marker.pokemon.name : 'Undefined :O'}
                     </InfoWindow>}
                   </Marker>
