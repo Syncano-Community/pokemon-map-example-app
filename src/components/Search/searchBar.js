@@ -60,7 +60,6 @@ class SearchBar extends Component {
           maxSearchResults={10}
           style={{margin: '0 15'}}
           onNewRequest={(value) => appState.setSearchTerm(value.text)}
-          // onUpdateInput={(value) => appState.setSearchTerm(value)}
           dataSource={this.renderMenuItems()}
         />
       </Paper>

@@ -54,7 +54,7 @@ class Map extends Component {
 
   handleMarkerClick(marker) {
     marker.showInfo = !marker.showInfo;
-    this.props.appState.setCenterMap(marker);
+    this.props.appState.setCenterMap(marker.position);
   }
 
   render() {
@@ -76,7 +76,7 @@ class Map extends Component {
             zoom={appState.zoomMap}
             defaultCenter={{ lat: 25.363882, lng: 135.044922 }}
             center={ appState.centerMap }
-            // onClick={this.handleMapClick}
+            onZoomChanged={() => appState.setSearchTerm()}
           >
             <MarkerClusterer
               averageCenter

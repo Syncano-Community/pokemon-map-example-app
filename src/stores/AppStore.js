@@ -77,7 +77,7 @@ class AppStore {
     return marker.pokemon && _.toLower(marker.pokemon.name).includes(_.toLower(this.term));
   }
 
-  setSearchTerm = (term) => {
+  setSearchTerm = (term = '') => {
     this.term = term;
   }
 
