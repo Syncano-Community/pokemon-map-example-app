@@ -7,6 +7,7 @@ import _ from 'lodash';
 import { GoogleMapLoader, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
 import { default as MarkerClusterer } from 'react-google-maps/lib/addons/MarkerClusterer';
 import { triggerEvent } from 'react-google-maps/lib/utils';
+import AddPopover from '../AddPopover/AddPopover';
 
 @inject('appState') @observer
 class Map extends Component {
@@ -14,6 +15,7 @@ class Map extends Component {
   constructor(props, context) {
     super(props, context);
     this.handleWindowResize = _.throttle(this.handleWindowResize, 500);
+    const handleShowPopover = false;
   }
 
   componentDidMount() {
@@ -57,51 +59,61 @@ class Map extends Component {
     this.props.appState.setCenterMap(marker.position);
   }
 
+  handleShowPopover = (event) => {
+    const { appState } = this.props;
+  
+    this.props.appState.openPopover(event);
+  }
+
   render() {
     const { appState } = this.props;
 
     return (
-      <GoogleMapLoader
-        containerElement={
-          <div
-            {...this.props}
-            style={{
-              height: '90%',
-            }}
-          />
-        }
-        googleMapElement={
-          <GoogleMap
-            defaultZoom={3}
-            zoom={appState.zoomMap}
-            defaultCenter={{ lat: 25.363882, lng: 135.044922 }}
-            center={ appState.centerMap }
-            onZoomChanged={() => appState.setSearchTerm()}
-          >
-            <MarkerClusterer
-              averageCenter
-              minimumClusterSize={4}
-              gridSize={ 60 }
+      <div>
+        <GoogleMapLoader
+          containerElement={
+            <div
+              {...this.props}
+              style={{
+                height: '90%',
+              }}
+            />
+          }
+          googleMapElement={
+            <GoogleMap
+              defaultZoom={3}
+              zoom={appState.zoomMap}
+              defaultCenter={{ lat: 25.363882, lng: 135.044922 }}
+              center={ appState.centerMap }
+              onZoomChanged={() => appState.setSearchTerm()}
+              onRightclick={this.handleShowPopover}
             >
-              {appState.markers && _.map(appState.markers, (marker, index) => {
-                return (
-                  <Marker
-                    {...marker}
-                    onClick={this.handleMarkerClick.bind(this, marker)}
-                    visible={appState.handleSearchTerm(marker)}
-                    icon={marker.pokemon.image_url}
-                  >
-                    {marker.showInfo && appState.handleSearchTerm(marker) && 
-                    <InfoWindow>
-                      {marker.pokemon ? marker.pokemon.name : 'Undefined :O'}
-                    </InfoWindow>}
-                  </Marker>
-                );
-              })}
-            </MarkerClusterer>
-          </GoogleMap>
-        }
-      />
+              <MarkerClusterer
+                averageCenter
+                minimumClusterSize={4}
+                gridSize={ 60 }
+              >
+                {appState.markers && _.map(appState.markers, (marker, index) => {
+                  return (
+                    <Marker
+                      {...marker}
+                      onClick={this.handleMarkerClick.bind(this, marker)}
+                      visible={appState.handleSearchTerm(marker)}
+                      icon={marker.pokemon.image_url}
+                    >
+                      {marker.showInfo && appState.handleSearchTerm(marker) && 
+                      <InfoWindow>
+                        {marker.pokemon ? marker.pokemon.name : 'Undefined :O'}
+                      </InfoWindow>}
+                    </Marker>
+                  );
+                })}
+              </MarkerClusterer>
+            </GoogleMap>
+          }
+        />
+        <AddPopover/>
+      </div>
     );
   }
 }

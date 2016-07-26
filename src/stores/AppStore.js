@@ -2,6 +2,7 @@ import { observable } from 'mobx'
 import Syncano from 'syncano';
 
 import _ from 'lodash';
+import { default as update } from 'react-addons-update';
 
 const connection = Syncano({
     baseUrl: 'https://api.syncano.rocks',
@@ -17,6 +18,7 @@ class AppStore {
   @observable term = '';
   @observable centerMap = { lat: 0, lng: 0 };
   @observable zoomMap = 3;
+  @observable popover = { show: false, position: {}};
 
   constructor(){
     this.markers = [];
@@ -86,16 +88,30 @@ class AppStore {
     this.zoomMap = 6;
   }
 
-  // addTodo(text) {
-  //   const marker = {
-  //     id: this.markers.length,
-  //     text,
-  //     other: null
-  //   }
-  //   this.markers.unshift(marker)
-  //   return marker
-  // }
+  openPopover = (event) => {
+    this.setPosition = event.latLng;
+    this.popover.position = event.pixel;
+    this.popover.show = true;
+  }
 
+  addPokemon = (pokemon) => {
+    const { DataObject } = connection;
+    const newPokemon = {
+          geo: {
+            latitude: this.setPosition.lat(),
+            longitude: this.setPosition.lng()
+          },
+          key: this.markers.length,
+          pokemon_id: pokemon.id
+        };
+
+    DataObject.please({className: 'markers'}).create(newPokemon)
+      .then(() => {
+        this.popover.show = false;
+      });
+    
+    this.fetchMarkers();
+  }
 }
 
 export default AppStore;

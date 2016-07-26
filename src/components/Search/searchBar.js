@@ -43,7 +43,6 @@ class SearchBar extends Component {
 
   render() {
     const { appState } = this.props;
-
     const styles = {
       paper: {
         display: 'inline-block',
