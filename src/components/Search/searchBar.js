@@ -24,7 +24,7 @@ class SearchBar extends Component {
         <MenuItem 
           key={index}
           primaryText={marker.pokemon.name}
-          secondaryText={_.map(marker.pokemon.type, (type) => `${type} `)}
+          secondaryText={_.map(marker.pokemon.types, (type) => `${type} `)}
           style={{ lineHeight: '75px' }}
           onTouchTap={() => appState.setCenterMap(marker.position)}
           leftIcon={

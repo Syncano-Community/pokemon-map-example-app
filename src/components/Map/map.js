@@ -70,7 +70,7 @@ class Map extends Component {
           >
             <MarkerClusterer
               averageCenter
-              minimumClusterSize={4}
+              minimumClusterSize={3}
               gridSize={ 60 }
             >
               {appState.markers && _.map(appState.markers, (marker, index) => {
@@ -83,7 +83,12 @@ class Map extends Component {
                   >
                     {marker.showInfo && appState.handleSearchTerm(marker) && 
                     <InfoWindow>
-                      {marker.pokemon ? marker.pokemon.name : 'Undefined :O'}
+                      {marker.pokemon && (
+                        <div>
+                          {marker.pokemon.name}
+                          {marker.pokemon.types.map((type) => type)}
+                        </div>
+                      )}
                     </InfoWindow>}
                   </Marker>
                 );
