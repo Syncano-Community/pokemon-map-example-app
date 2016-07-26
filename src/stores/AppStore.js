@@ -35,17 +35,8 @@ class AppStore {
 
     all.on('stop', () => {
       console.log('all::page', objects.length);
-      const markers = _.map(objects, (marker, index) => {
-        return {
-          position: {
-            lat: marker.geo.latitude,
-            lng: marker.geo.longitude
-          },
-          key: marker.id,
-          defaultAnimation: 2,
-          showInfo: false,
-          pokemon: this.getPokemonInfo(marker.pokemon_id)
-        }
+      const markers = _.map(objects, (marker) => {
+        return marker.geo && marker.pokemon_id && this.setMarkerObj(marker);
       });
       this.markers = markers;
     });
@@ -77,6 +68,19 @@ class AppStore {
     return marker.pokemon && _.toLower(marker.pokemon.name).includes(_.toLower(this.term));
   }
 
+  setMarkerObj(marker) {
+    return {
+      position: {
+        lat: marker.geo.latitude,
+        lng: marker.geo.longitude
+      },
+      key: marker.id,
+      defaultAnimation: 2,
+      showInfo: false,
+      pokemon: this.getPokemonInfo(marker.pokemon_id)
+    }
+  }
+
   setSearchTerm = (term = '') => {
     this.term = term;
   }
@@ -85,16 +89,6 @@ class AppStore {
     this.centerMap = position;
     this.zoomMap = 6;
   }
-
-  // addTodo(text) {
-  //   const marker = {
-  //     id: this.markers.length,
-  //     text,
-  //     other: null
-  //   }
-  //   this.markers.unshift(marker)
-  //   return marker
-  // }
 
 }
 

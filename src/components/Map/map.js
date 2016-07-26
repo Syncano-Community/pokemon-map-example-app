@@ -42,16 +42,6 @@ class Map extends Component {
     triggerEvent(this._googleMapComponent, 'resize');
   }
 
-  handleMapClick = (event) => {
-    const { appState } = this.props;
-
-    appState.markers.push({
-      position: event.latLng,
-      defaultAnimation: 2,
-      key: Date.now()
-    });
-  }
-
   handleMarkerClick(marker) {
     marker.showInfo = !marker.showInfo;
     this.props.appState.setCenterMap(marker.position);
@@ -66,7 +56,7 @@ class Map extends Component {
           <div
             {...this.props}
             style={{
-              height: '90%',
+              height: 'calc(100% - 50px)',
             }}
           />
         }
