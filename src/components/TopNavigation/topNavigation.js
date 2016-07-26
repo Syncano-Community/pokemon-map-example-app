@@ -51,6 +51,7 @@ export default class TopNavigation extends React.Component {
           hoverColor={styles.flatButtonHoverColor}
           style={{ marginTop: 7 }}
         />
+        <span style={{...styles.flatButtonLabelStyle, marginLeft: 80, opacity: .8}}>Right Click on the Map to Add New Pokemon</span>
       </Toolbar>
     );
   }

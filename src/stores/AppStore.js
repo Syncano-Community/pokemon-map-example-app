@@ -2,10 +2,10 @@ import { observable } from 'mobx'
 import Syncano from 'syncano';
 
 import _ from 'lodash';
+import { default as update } from 'react-addons-update';
 
 const connection = Syncano({
-    baseUrl: 'https://api.syncano.rocks',
-    apiKey: '3287b43491f3ebefa95bcb91e76c62a701f3c09b',
+    apiKey: '35a804b63e6b00d0abb5af3e104edebbc9d719a0',
     defaults: {
       instanceName: 'pokemon-map'
   }
@@ -17,6 +17,7 @@ class AppStore {
   @observable term = '';
   @observable centerMap = { lat: 0, lng: 0 };
   @observable zoomMap = 3;
+  @observable popover = { show: false, position: {}};
 
   constructor(){
     this.markers = [];
@@ -47,7 +48,7 @@ class AppStore {
     const { DataObject } = connection;
     let objects = [];
 
-    const all = DataObject.please({className: 'pokemon'}).all({}, {}, true, Infinity);
+    const all = DataObject.please({className: 'pokemons'}).all({}, {}, true, Infinity);
 
     all.on('page', function(page) {
       objects = [...objects, ...page];
@@ -90,6 +91,30 @@ class AppStore {
     this.zoomMap = 6;
   }
 
+  openPopover = (event) => {
+    this.setPosition = event.latLng;
+    this.popover.position = event.pixel;
+    this.popover.show = true;
+  }
+
+  addPokemon = (pokemon) => {
+    const { DataObject } = connection;
+    const newPokemon = {
+          geo: {
+            latitude: this.setPosition.lat(),
+            longitude: this.setPosition.lng()
+          },
+          key: this.markers.length,
+          pokemon_id: pokemon.id
+        };
+
+    DataObject.please({className: 'markers'}).create(newPokemon)
+      .then(() => {
+        this.popover.show = false;
+      });
+    
+    this.fetchMarkers();
+  }
 }
 
 export default AppStore;
