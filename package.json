@@ -1,14 +1,24 @@
 {
   "name": "Pokemon_Map_Syncano",
   "version": "1.0.0",
-  "description": "Pokemon Map based on Syncano.",
+  "description": "Pokemon Radar based on Syncano.",
   "scripts": {
     "start": "node server.js",
     "lint": "eslint src"
   },
+  "keywords": [
+    "pokemon",
+    "radar",
+    "map",
+    "syncano",
+    "react",
+    "mobx"
+  ],
+  "author": "Daniel Siwek && Piotr Owerczuk",
+  "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mobxjs/mobx-react-boilerplate.git"
+    "url": "https://github.com/Syncano-Community/pokemon-map-example-app.git"
   },
   "devDependencies": {
     "babel-core": "6.11.4",
@@ -20,6 +30,7 @@
     "babel-preset-stage-1": "6.5.0",
     "eslint": "3.1.1",
     "eslint-plugin-react": "5.2.2",
+    "html-webpack-plugin": "^2.22.0",
     "mobx-react-devtools": "4.2.3",
     "react-hot-loader": "3.0.0-beta.2",
     "webpack": "1.13.1",
