@@ -1,10 +1,9 @@
 {
   "name": "Pokemon_Map_Syncano",
   "version": "1.0.0",
-  "description": "Pokemon Radar based on Syncano.",
+  "description": "Pokemon Radar based on Syncano",
   "scripts": {
-    "start": "node server.js",
-    "lint": "eslint src"
+    "start": "node server.js"
   },
   "keywords": [
     "pokemon",
@@ -30,7 +29,7 @@
     "babel-preset-stage-1": "6.5.0",
     "eslint": "3.1.1",
     "eslint-plugin-react": "5.2.2",
-    "html-webpack-plugin": "^2.22.0",
+    "html-webpack-plugin": "2.22.0",
     "mobx-react-devtools": "4.2.3",
     "react-hot-loader": "3.0.0-beta.2",
     "webpack": "1.13.1",
