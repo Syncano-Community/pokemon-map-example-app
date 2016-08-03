@@ -41,7 +41,7 @@ export default class TopNavigation extends React.Component {
 
     return (
       <Toolbar style={styles.topToolbar}>
-        <img src="./src/components/TopNavigation/syncano-logo-white.png" style={styles.logo} alt=""/>
+        <img src="http://syncano.github.io/minihacks/images/syncano-logo-white.png" style={styles.logo} alt=""/>
         <HeaderGettingStartedDropdown />
         <FlatButton
           href='https://github.com/Syncano-Community/pokemon-map-example-app'
