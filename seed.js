@@ -1,9 +1,8 @@
 var Syncano = require('syncano'); // CommonJS
 var connection = Syncano({
-  baseUrl: 'https://api.syncano.io',
-  accountKey: '35a804b63e6b00d0abb5af3e104edebbc9d719a0',
+  apiKey: '<YOUR_API_KEY>',
   defaults: {
-    instanceName: 'pokemon-map',
+    instanceName: '<YOUR_INSTANCE_NAME>',
     className: 'markers'
   }
 });

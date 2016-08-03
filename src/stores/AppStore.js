@@ -5,7 +5,7 @@ import _ from 'lodash';
 import { default as update } from 'react-addons-update';
 
 const connection = Syncano({
-    apiKey: '35a804b63e6b00d0abb5af3e104edebbc9d719a0',
+    apiKey: 'e100bf4efdd60b25430071ec5b146aac4e6a33d3',
     defaults: {
       instanceName: 'pokemon-map'
   }
@@ -87,6 +87,9 @@ class AppStore {
   }
 
   setCenterMap = (position) => {
+    _.map(this.markers, (marker) => {
+      marker.showInfo = false;
+    })
     this.centerMap = position;
     this.zoomMap = 6;
   }

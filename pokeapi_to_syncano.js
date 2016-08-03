@@ -2,9 +2,9 @@ var Syncano = require('syncano'); // CommonJS
 var PokeApi = require('pokeapi');
 
 var connection = Syncano({
-  accountKey: '35a804b63e6b00d0abb5af3e104edebbc9d719a0',
+  apiKey: '<YOUR_API_KEY>',
   defaults: {
-    instanceName: 'pokemon-map',
+    instanceName: '<YOUR_INSTANCE_NAME>',
     className: 'pokemons'
   }
 });

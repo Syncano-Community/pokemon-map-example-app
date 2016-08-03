@@ -44,8 +44,8 @@ class Map extends Component {
   }
 
   handleMarkerClick(marker) {
-    marker.showInfo = !marker.showInfo;
     this.props.appState.setCenterMap(marker.position);
+    marker.showInfo = !marker.showInfo;
   }
 
   render() {
