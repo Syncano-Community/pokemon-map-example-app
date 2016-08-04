@@ -23,7 +23,7 @@ class HeaderGettingStartedDropdown extends Component {
       },
       gettingStartedHeaderContainer: {
         marginTop: '7px',
-        marginLeft: 150
+        marginLeft: 10
       },
       fontIconColor: {
         color: 'rgba(255,255,255,0.6)'

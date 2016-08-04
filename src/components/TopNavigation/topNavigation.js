@@ -19,11 +19,6 @@ export default class TopNavigation extends React.Component {
         padding: 0,
         justifyContent: 'flex-start'
       },
-      logo: {
-        width: 120,
-        height: 19,
-        margin: 'auto 20px'
-      },
       flatButtonLabelStyle: {
         color: '#fff',
         opacity: 0.6,
@@ -41,7 +36,6 @@ export default class TopNavigation extends React.Component {
 
     return (
       <Toolbar style={styles.topToolbar}>
-        <img src="http://syncano.github.io/minihacks/images/syncano-logo-white.png" style={styles.logo} alt=""/>
         <HeaderGettingStartedDropdown />
         <FlatButton
           href='https://github.com/Syncano-Community/pokemon-map-example-app'
