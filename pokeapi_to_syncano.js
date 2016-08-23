@@ -29,8 +29,8 @@ for (var i = 1; i <= 151; i++) {
     connection.DataObject.please().create({
       pokemon_id: response.national_id,
       name: response.name,
-      type: types,
-      image_url: 'http://pokeapi.co/media/sprites/pokemon/' + response.national_id + '.png'
+      types: types,
+      image_url: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + response.national_id + '.png'
     });
   })
 }

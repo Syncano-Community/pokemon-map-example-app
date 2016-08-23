@@ -80,7 +80,7 @@ class Map extends Component {
             <div
               {...this.props}
               style={{
-                height: 'calc(100% - 50px)',
+                height: '95%',
               }}
             />
           }
@@ -134,7 +134,7 @@ class Map extends Component {
             </GoogleMap>
           }
         />
-        <AddPopover/>
+        <AddPopover />
       </div>
     );
   }
