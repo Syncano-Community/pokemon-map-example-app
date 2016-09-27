@@ -68,6 +68,18 @@ class HeaderGettingStartedDropdown extends Component {
         >
           <Menu onItemTouchTap={this.handleRequestClose}>
             <a
+                href="http://docs.syncano.io/docs/syncano-overview/"
+                target="_blank"
+              >
+                <MenuItem primaryText="Syncano Overview" />
+            </a>
+            <a
+              href="http://docs.syncano.io/docs/quick-start-tutorial/"
+              target="_blank"
+            >
+              <MenuItem primaryText="Quick Start Tutorial" />
+            </a>
+            <a
               href="http://docs.syncano.io/"
               target="_blank"
             >
@@ -78,12 +90,6 @@ class HeaderGettingStartedDropdown extends Component {
               target="_blank"
             >
               <MenuItem primaryText="Tutorials" />
-            </a>
-            <a
-              href="http://docs.syncano.io/docs/getting-started-with-syncano"
-              target="_blank"
-            >
-              <MenuItem primaryText="Quick Start Guide" />
             </a>
           </Menu>
         </Popover>
